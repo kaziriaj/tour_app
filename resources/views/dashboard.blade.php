@@ -1,62 +1,63 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-bold text-2xl text-gray-800">
-            🌍 Tour Gallery Dashboard
-        </h2>
-    </x-slot>
+@extends('layouts.app')
+@section('container')
+     <div class="container-fluid py-4">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
 
-    <div class="py-10 bg-gray-100 min-h-screen">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-            <!-- Welcome Card -->
-            <div class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-8 rounded-xl shadow-lg mb-8">
-                <h3 class="text-2xl font-semibold mb-2">
-                    Welcome, {{ Auth::user()->name }} 👋
-                </h3>
-                <p class="text-lg">
-                    Explore and share your beautiful travel memories from
-                    Nepal, India, Bhutan & Sri Lanka.
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up the bulk of the card's
+                  content.
                 </p>
+
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+              </div>
             </div>
 
-            <!-- Quick Action Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="card card-primary card-outline">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
 
-                <!-- View Photos -->
-                <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-                    <h4 class="text-xl font-semibold mb-2">📸 View Gallery</h4>
-                    <p class="text-gray-600 mb-4">
-                        Explore all tour photos shared by you and your friends.
-                    </p>
-                    <a href="#" class="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
-                        Go to Gallery
-                    </a>
-                </div>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up the bulk of the card's
+                  content.
+                </p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+              </div>
+            </div><!-- /.card -->
+          </div>
+          <!-- /.col-md-6 -->
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="m-0">Featured</h5>
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Special title treatment</h6>
 
-                <!-- Upload Photo -->
-                <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-                    <h4 class="text-xl font-semibold mb-2">⬆ Upload Photo</h4>
-                    <p class="text-gray-600 mb-4">
-                        Add your new travel memories to the gallery.
-                    </p>
-                    <a href="#" class="inline-block bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
-                        Upload Now
-                    </a>
-                </div>
-
-                <!-- Profile -->
-                <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-                    <h4 class="text-xl font-semibold mb-2">👤 My Profile</h4>
-                    <p class="text-gray-600 mb-4">
-                        Manage your account and personal information.
-                    </p>
-                    <a href="{{ route('profile.edit') }}" class="inline-block bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600">
-                        Edit Profile
-                    </a>
-                </div>
-
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
             </div>
 
+            <div class="card card-primary card-outline">
+              <div class="card-header">
+                <h5 class="m-0">Featured</h5>
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">Special title treatment</h6>
+
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <!-- /.col-md-6 -->
         </div>
-    </div>
-</x-app-layout>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+@endsection
