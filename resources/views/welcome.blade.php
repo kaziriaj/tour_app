@@ -9,26 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-        .hero {
-            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
-            height: 80vh;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
 
-        .hero-overlay {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 40px;
-            border-radius: 10px;
-        }
-
-        .card img {
-            height: 200px;
-            object-fit: cover;
-        }
 
         footer {
             background: #212529;
@@ -88,77 +69,82 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-overlay">
-            <h1 class="display-4">Explore Beautiful Countries</h1>
-            <p class="lead">Nepal • India • Bhutan • Sri Lanka</p>
-            <a href="#" class="btn btn-warning btn-lg">View Gallery</a>
+   <div class="container py-4">
+
+    <h2 class="mb-4">All Posts</h2>
+
+    @foreach($albums as $album)
+        <div class="card mb-4 shadow-sm">
+
+            <!-- Post Header -->
+            <div class="d-flex align-items-center p-3 border-bottom">
+                <img src="https://i.pravatar.cc/150?img={{ $album->user->id }}"
+                     class="rounded-circle me-3" width="50" height="50" alt="Profile Pic">
+                <div>
+                    <h6 class="mb-0 fw-bold">{{ $album->user->name }}</h6>
+                    <small class="text-muted">{{ $album->created_at->diffForHumans() }}</small>
+                </div>
+            </div>
+
+            <!-- Post Content -->
+            <div class="p-3">
+                <p class="mb-2">{{ $album->album_title }}</p>
+                @if($album->album_cover)
+                    <img src="{{ asset('storage/' . $album->album_cover) }}"
+                         class="img-fluid rounded mb-3" alt="Album Cover">
+                @endif
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-between px-3 mb-2">
+                @auth
+                    <form action="{{ route('albums.like', $album) }}" method="POST">
+                        @csrf
+                        <button type="submit"
+                                class="btn btn-sm {{ $album->likedBy(auth()->user()) ? 'btn-primary' : 'btn-outline-primary' }}">
+                            Like ({{ $album->likes->count() }})
+                        </button>
+                    </form>
+                    <button class="btn btn-sm btn-outline-secondary"
+                            onclick="document.getElementById('comment-box-{{ $album->id }}').classList.toggle('d-none')">
+                        Comment ({{ $album->comments->count() }})
+                    </button>
+                @else
+                    <button class="btn btn-sm btn-outline-primary" disabled>
+                        Like ({{ $album->likes->count() }})
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary" disabled>
+                        Comment ({{ $album->comments->count() }})
+                    </button>
+                @endauth
+                <button class="btn btn-sm btn-outline-success">Share</button>
+            </div>
+
+            <!-- Comment Form (only for logged-in users) -->
+            @auth
+            <div id="comment-box-{{ $album->id }}" class="px-3 mb-3 d-none">
+                <form action="{{ route('albums.comment', $album) }}" method="POST">
+                    @csrf
+                    <div class="input-group">
+                        <input type="text" name="comment_text" class="form-control" placeholder="Add a comment..." required>
+                        <button class="btn btn-primary" type="submit">Post</button>
+                    </div>
+                </form>
+            </div>
+            @endauth
+
+            <!-- Display Comments -->
+            <ul class="list-group list-group-flush px-3 pb-3">
+                @foreach($album->comments as $comment)
+                    <li class="list-group-item py-1">
+                        <strong>{{ $comment->user?->name ?? 'Deleted User' }}:</strong> {{ $comment->comment_text }}
+                        <small class="text-muted d-block">{{ $comment->created_at->diffForHumans() }}</small>
+                    </li>
+                @endforeach
+            </ul>
+
         </div>
-    </section>
-
-    <!-- Country Section -->
-    <div class="container mt-5">
-        <h2 class="text-center mb-4">Popular Destinations</h2>
-
-        <div class="row">
-
-            <!-- Nepal -->
-            <div class="col-md-3">
-                <div class="card shadow">
-                    <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa" class="card-img-top">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Nepal</h5>
-                        <a href="#" class="btn btn-outline-primary btn-sm">View Photos</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- India -->
-            <div class="col-md-3">
-                <div class="card shadow">
-                    <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da" class="card-img-top">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">India</h5>
-                        <a href="#" class="btn btn-outline-primary btn-sm">View Photos</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bhutan -->
-            <div class="col-md-3">
-                <div class="card shadow">
-                    <img src="https://images.unsplash.com/photo-1605379399642-870262d3d051" class="card-img-top">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Bhutan</h5>
-                        <a href="#" class="btn btn-outline-primary btn-sm">View Photos</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sri Lanka -->
-            <div class="col-md-3">
-                <div class="card shadow">
-                    <img src="https://images.unsplash.com/photo-1589308078056-fc7d9b70c19e" class="card-img-top">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Sri Lanka</h5>
-                        <a href="#" class="btn btn-outline-primary btn-sm">View Photos</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- About Section -->
-    <div class="container mt-5 text-center">
-        <h2>About This App</h2>
-        <p class="mt-3">
-            This tour gallery app allows you to explore beautiful travel photos.
-            Register, login, like photos, and share your happy feelings through comments.
-        </p>
-    </div>
-
+@endforeach
     <!-- Footer -->
     <footer class="text-center">
         <div class="container">

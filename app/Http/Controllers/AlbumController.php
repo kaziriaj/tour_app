@@ -141,4 +141,9 @@ class AlbumController extends Controller
 
     return back();
 }
+public function homepost()
+{
+    $albums = Albums::latest()->get();
+    return view('welcome', compact('albums'));
+}
 }
