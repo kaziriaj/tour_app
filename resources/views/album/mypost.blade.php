@@ -8,23 +8,23 @@
                 @include('album.create')
 
                 <!-- Sample Photo Post -->
-
-                <div class="card shadow-sm p-3 post-card">
+                @foreach ($albums as $album)
+                  <div class="card shadow-sm p-3 post-card">
 
                     <!-- Post Header -->
                     <div class="d-flex align-items-center mb-3">
                         <img src="https://i.pravatar.cc/150?img=5" class="profile-img me-3">
                         <div>
-                            <h6 class="mb-0 fw-bold">John Doe</h6>
-                            <small class="text-muted">2 hrs ago</small>
+                            <h6 class="mb-0 fw-bold">{{ $album->user->name }}</h6>
+                            <small class="text-muted">{{ $album->created_at->diffForHumans() }}</small>
                         </div>
                     </div>
 
                     <!-- Post Text -->
-                    <p>Enjoying the beautiful sunset 🌅</p>
+                    <p>{{ $album->album_title }}</p>
 
                     <!-- Post Image -->
-                    <img src="https://images.unsplash.com/photo-1501973801540-537f08ccae7b" class="post-img mb-3">
+                    <img src="{{ asset('storage/' . $album->album_cover) }}" class="post-img mb-3">
 
                     <!-- Like/Comment Buttons -->
                     <div class="d-flex justify-content-between">
@@ -34,6 +34,8 @@
                     </div>
 
                 </div>
+                @endforeach
+
 
             </div>
         </div>

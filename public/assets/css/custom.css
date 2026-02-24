@@ -1,0 +1,13 @@
+.post-card{
+      border-radius:15px;
+    }
+    .profile-img{
+      width:45px;
+      height:45px;
+      border-radius:50%;
+      object-fit:cover;
+    }
+    .post-img{
+      width:100%;
+      border-radius:10px;
+    }

@@ -16,6 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="https://adminlte.io/themes/v3/dist/css/adminlte.min.css?v=3.2.0">
   <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
