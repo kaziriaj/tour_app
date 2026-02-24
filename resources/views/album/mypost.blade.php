@@ -53,7 +53,7 @@
                         <form action="{{ route('albums.comment', $album) }}" method="POST">
                             @csrf
                             <div class="input-group mb-2">
-                                <input type="text" name="comment" class="form-control" placeholder="Add a comment..." required>
+                                <input type="text" name="comment_text" class="form-control" placeholder="Add a comment..." required>
                                 <button type="submit" class="btn btn-primary">Post</button>
                             </div>
                         </form>
@@ -63,7 +63,7 @@
                     <ul class="list-group list-group-flush">
                         @foreach($album->comments as $comment)
                             <li class="list-group-item py-1">
-                                <strong>{{ $comment->user->name }}:</strong> {{ $comment->comment }}
+                                <strong>{{ $comment->user->name }}:</strong> {{ $comment->comment_text }}
                                 <small class="text-muted d-block">{{ $comment->created_at->diffForHumans() }}</small>
                             </li>
                         @endforeach

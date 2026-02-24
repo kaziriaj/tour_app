@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/create-album', [AlbumController::class, 'store'])->name('album.store');
     Route::post('/albums/{album}/like', [AlbumController::class, 'liketogoller'])->name('albums.like');
     Route::post('/albums/{album}/comment', [AlbumController::class, 'storeComment'])->name('albums.comment');
-
+    Route::get('/allposts', [AlbumController::class, 'allPosts'])->name('album.allposts');
 });
 
 require __DIR__.'/auth.php';

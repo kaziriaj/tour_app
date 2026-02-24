@@ -27,6 +27,14 @@
                   <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                   <li class="nav-item menu-open">
+                      <a href="{{route('album.allposts') }}" class="nav-link {{ Request::is('allposts') ? 'active' : '' }}">
+                          <i class="fa-solid fa-pen-to-square"></i>
+                          <p>
+                             All Posts
+                          </p>
+                      </a>
+                  </li>
+                  <li class="nav-item menu-open">
                       <a href="{{route('album.index') }}" class="nav-link {{ Request::is('mypost') ? 'active' : '' }}">
                           <i class="fa-solid fa-pen-to-square"></i>
                           <p>

@@ -12,4 +12,13 @@ class Comments extends Model
         'comment_text',
         'is_public',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function album()
+    {
+        return $this->belongsTo(Albums::class, 'album_id');
+    }
 }

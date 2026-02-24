@@ -102,7 +102,11 @@ class AlbumController extends Controller
     {
         //
     }
-
+    public function allPosts()
+    {
+        $albums = Albums::latest()->get();
+        return view('album.allpost', compact('albums'));
+    }
     public function liketogoller(Albums $album)
 {
     $user = auth()->user();
@@ -126,12 +130,13 @@ class AlbumController extends Controller
     public function storeComment(Request $request, Albums $album)
 {
     $request->validate([
-        'comment' => 'required|string|max:500',
+        'comment_text' => 'required|string|max:500',
     ]);
 
     $album->comments()->create([
         'user_id' => auth()->id(),
-        'comment' => $request->comment,
+        'comment_text' => $request->comment_text,
+        'is_public' => true,
     ]);
 
     return back();
