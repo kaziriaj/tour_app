@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Likes extends Model
 {
     protected $fillable = [
-        'photo_id',
+        'album_id',
         'user_id',
     ];
 }

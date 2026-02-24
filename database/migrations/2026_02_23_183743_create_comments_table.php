@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('photo_id');
-            $table->foreign('photo_id')->references('id')->on('photo_galleries')->onDelete('cascade');
+            $table->foreignId('album_id')->constrained('albums')->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->text('comment_text');
             $table->boolean('is_public')->default(true);

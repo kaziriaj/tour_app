@@ -20,7 +20,8 @@ Route::middleware('auth')->group(function () {
     // Add routes for the new features
     Route::get('/mypost', [AlbumController::class, 'index'])->name('album.index');
     Route::post('/create-album', [AlbumController::class, 'store'])->name('album.store');
-
+    Route::post('/albums/{album}/like', [AlbumController::class, 'liketogoller'])->name('albums.like');
+    Route::post('/albums/{album}/comment', [AlbumController::class, 'storeComment'])->name('albums.comment');
 
 });
 

@@ -102,4 +102,38 @@ class AlbumController extends Controller
     {
         //
     }
+
+    public function liketogoller(Albums $album)
+{
+    $user = auth()->user();
+
+    // Find if the user has already liked this album
+    $like = $album->likes()->where('user_id', $user->id)->first();
+
+    if ($like) {
+        // Unlike → delete the like record only
+        $like->delete();
+    } else {
+        // Like → create a new like record
+        $album->likes()->create([
+            'user_id' => $user->id,
+        ]);
+    }
+
+    return back();
+}
+
+    public function storeComment(Request $request, Albums $album)
+{
+    $request->validate([
+        'comment' => 'required|string|max:500',
+    ]);
+
+    $album->comments()->create([
+        'user_id' => auth()->id(),
+        'comment' => $request->comment,
+    ]);
+
+    return back();
+}
 }
